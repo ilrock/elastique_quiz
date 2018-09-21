@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Store from './store'
-
+import store from './store'
 import Home from './views/Home'
-import Quiz from './views/Quiz'
+import Question from './views/Question'
 
 Vue.use(Router)
+
+const ifNoQuestionsLoaded = (to, from, next) => {
+  const questions = store.getters.questions
+  if (questions.length > 0) {
+    next()
+  } else next('/')
+}
 
 export default new Router({
   routes: [
@@ -15,9 +21,10 @@ export default new Router({
       component: Home
     },
     {
-      path: '/quiz',
-      name: 'quiz',
-      component: Quiz
+      path: '/questions/:id',
+      name: 'question',
+      beforeEnter: ifNoQuestionsLoaded,
+      component: Question
     }
   ]
 })
