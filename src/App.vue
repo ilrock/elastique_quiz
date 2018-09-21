@@ -5,7 +5,9 @@
         </v-toolbar>
         <v-content>
             <v-container grid-list-xs>
-                <router-view></router-view>
+                <transition name="fade">
+                    <router-view/>
+                </transition>
             </v-container>
         </v-content>
     </v-app>
@@ -15,7 +17,17 @@ export default {
   name: 'app'
 }
 </script>
-
 <style>
+  .fade-enter-active, .fade-leave-active {
+    transition-property: opacity;
+    transition-duration: .25s;
+  }
 
+  .fade-enter-active {
+    transition-delay: .25s;
+  }
+
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
 </style>

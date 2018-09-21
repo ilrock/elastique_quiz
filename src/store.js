@@ -19,7 +19,10 @@ export default new Vuex.Store({
   },
   actions: {
     addPlayers ({ commit }, payload) {
-      commit('addPlayers', payload)
+      return new Promise((resolve, reject) => {
+        commit('addPlayers', payload)
+        resolve()
+      })
     }
   }
 })

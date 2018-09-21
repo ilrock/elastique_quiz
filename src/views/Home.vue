@@ -34,11 +34,11 @@ export default {
   methods: {
     onStartQuizClick () {
       this.$store.dispatch('addPlayers', this.players)
+        .then(() => this.$router.push('/quiz'))
     }
   }
 }
 </script>
 
 <style>
-
 </style>
