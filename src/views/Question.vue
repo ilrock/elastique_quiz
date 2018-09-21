@@ -3,10 +3,9 @@
         <v-layout row wrap>
             <v-flex xs12 sm10 offset-sm1>
                 <v-card class="elevation-4">
-                  <v-card-title class="title elevation-1" primary-title>
+                  <v-card-title class="title elevation-2" primary-title>
                     {{ question.text }}
                   </v-card-title>
-                  <v-divider></v-divider>
                   <!-- <v-toolbar card prominent class="elevation-2">
                     <v-toolbar-title class="title"> {{ question.text }} </v-toolbar-title>
                     <v-spacer></v-spacer>

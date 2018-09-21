@@ -3,10 +3,9 @@
         <v-layout row wrap>
             <v-flex xs12 sm8 offset-sm2>
                 <v-card class="elevation-4">
-                    <v-card-title class="title elevation-1" primary-title>
+                    <v-card-title class="title elevation-2" primary-title>
                         Add Players
                     </v-card-title>
-                    <v-divider></v-divider>
                     <v-card-text>
                         <v-form>
                             <v-text-field 
