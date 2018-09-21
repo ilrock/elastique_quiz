@@ -7,11 +7,11 @@
                         v-for="(player, index) in players"
                         v-model="player.name" 
                         :key="index" 
-                        :label="`Player ${index} name`" 
+                        :label="`Player ${++index} name`" 
                         id="id">
                     </v-text-field>
                 </v-form>
-                <v-btn color="success"> Start the quiz </v-btn>
+                <v-btn @click="onStartQuizClick" color="success"> Start the quiz </v-btn>
             </v-flex>
         </v-layout>
     </v-container>
@@ -29,6 +29,11 @@ export default {
           name: ''
         }
       ]
+    }
+  },
+  methods: {
+    onStartQuizClick () {
+      this.$store.dispatch('addPlayers', this.players)
     }
   }
 }
