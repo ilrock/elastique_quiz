@@ -32,11 +32,11 @@
                   </v-card-title>
                   <v-card-text>
                       <v-form ref="form">
-                          <v-text-field 
+                          <v-text-field
                               v-model="player.name"
                               :rules="rules.notEmpty"
                               label="What's your name, champion?">
-                          </v-text-field>   
+                          </v-text-field>
                       </v-form>
                   </v-card-text>
                   <v-card-actions class="pa-3">
@@ -50,7 +50,6 @@
             </v-flex>
           </v-layout>
         </transition>
-        
     </v-container>
 </template>
 
@@ -80,8 +79,8 @@ export default {
     onStartQuizClick () {
       if (this.$refs.form.validate()) {
         this.$store.dispatch('setPlayer', this.player)
-        .then(() => this.$router.push('/questions/1'))
-      }      
+          .then(() => this.$router.push('/questions/1'))
+      }
     }
   }
 }

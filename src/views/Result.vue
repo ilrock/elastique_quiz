@@ -91,23 +91,23 @@ export default {
       setTimeout(() => {
         this.headline.show = true
         this.headline.class = 'animated slideInLeft'
-      }, 500);
+      }, 500)
 
       setTimeout(() => {
         this.score.show = true
         this.score.class = 'animated slideInLeft'
-      }, 1500);
+      }, 1500)
 
       setTimeout(() => {
         this.name.show = true
         this.$confetti.start()
         this.name.class = 'animated slideInLeft'
-      }, 2500);
+      }, 2500)
 
       setTimeout(() => {
         this.leaderboard.show = true
         this.leaderboard.class = 'animated slideInRight'
-      }, 4000);
+      }, 4000)
     }
   }
 }

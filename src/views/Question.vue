@@ -12,9 +12,9 @@
                               <v-flex xs12>
                                   <div v-for="(answer, index) in shuffledAnswers" :key="index">
                                       <v-btn
-                                          :ref="`answer${index}`" 
+                                          :ref="`answer${index}`"
                                           @click="onAnswerClick(answer)"
-                                          block 
+                                          block
                                           :outline="selectedAnswer? false : true"
                                           :color="selectedAnswer? (answer.correct? 'green' : 'red') : 'indigo'">
                                               {{ answer.text }}
@@ -31,10 +31,10 @@
                           :width="10"
                           :value="value"
                           color="teal">
-                              <vue-countdown 
-                                  mode="seconds" 
-                                  :now-time="0" 
-                                  :end-time="20" 
+                              <vue-countdown
+                                  mode="seconds"
+                                  :now-time="0"
+                                  :end-time="20"
                                   @end="onCountdownEnd">
                               </vue-countdown>
                       </v-progress-circular>
@@ -60,10 +60,9 @@ export default {
   data () {
     return {
       interval: {},
-      alphabet: ['a','b','c','d'],
       selectedAnswer: null,
       value: 0,
-      countdown: 20,
+      countdown: 20
     }
   },
   beforeDestroy () {
@@ -95,7 +94,7 @@ export default {
     },
     nextUrl () {
       const currentId = parseInt(this.currentId)
-      if (parseInt(currentId) == this.questions.length){
+      if (parseInt(currentId) === this.questions.length) {
         return '/result'
       }
       return `/questions/${currentId + 1}`
@@ -106,14 +105,14 @@ export default {
       this.$router.push(this.nextUrl)
     },
     shuffle (array) {
-      var j, x, i;
+      let j, x, i
       for (i = array.length - 1; i > 0; i--) {
-          j = Math.floor(Math.random() * (i + 1));
-          x = array[i];
-          array[i] = array[j];
-          array[j] = x;
+        j = Math.floor(Math.random() * (i + 1))
+        x = array[i]
+        array[i] = array[j]
+        array[j] = x
       }
-      return array;
+      return array
     },
     onAnswerClick (answer) {
       this.selectedAnswer = answer
@@ -122,8 +121,8 @@ export default {
       }
       setTimeout(() => {
         this.$router.push(this.nextUrl)
-      }, 1500);
-    } 
+      }, 1500)
+    }
   }
 }
 </script>
