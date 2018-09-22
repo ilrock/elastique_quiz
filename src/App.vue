@@ -6,7 +6,7 @@
         <v-content>
             <v-container grid-list-xs>
                 <transition name="fade">
-                    <router-view/>
+                    <router-view :key="$route.fullPath"/>
                 </transition>
             </v-container>
         </v-content>
