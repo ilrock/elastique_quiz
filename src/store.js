@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     score: 0,
     leaderboard: leaderboard,
-    players: [],
+    player: null,
     questions: []
   },
   getters: {
@@ -28,8 +28,8 @@ export default new Vuex.Store({
     addToScore (state, payload) {
       state.score += payload
     },
-    addPlayers (state, payload) {
-      state.players = payload
+    setPlayer (state, payload) {
+      state.player = payload
     },
     setQuestions (state, payload) {
       state.questions = payload
@@ -39,9 +39,9 @@ export default new Vuex.Store({
     addToScore ({ commit }, payload) {
       commit('addToScore', payload)
     },
-    addPlayers ({ commit }, payload) {
+    setPlayer ({ commit }, payload) {
       return new Promise((resolve) => {
-        commit('addPlayers', payload)
+        commit('setPlayer', payload)
         resolve()
       })
     },

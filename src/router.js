@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from './store'
 import Home from './views/Home'
 import Question from './views/Question'
+import Result from './views/Result'
 
 Vue.use(Router)
 
@@ -25,6 +26,12 @@ export default new Router({
       name: 'question',
       beforeEnter: ifNoQuestionsLoaded,
       component: Question
+    },
+    {
+      path: '/result',
+      name: 'result',
+      beforeEnter: ifNoQuestionsLoaded,
+      component: Result
     }
   ]
 })

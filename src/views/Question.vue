@@ -96,7 +96,7 @@ export default {
     nextUrl () {
       const currentId = parseInt(this.currentId)
       if (parseInt(currentId) == this.questions.length){
-        return '/results'
+        return '/result'
       }
       return `/questions/${currentId + 1}`
     }

@@ -4,20 +4,18 @@
             <v-flex d-flex justify-center align-center xs12 sm6>
                 <v-card class="elevation-4">
                     <v-card-title class="title elevation-2" primary-title>
-                        Add Players
+                      Let's get started
                     </v-card-title>
                     <v-card-text>
-                        <v-form>
+                        <v-form ref="form">
                             <v-text-field 
-                                v-for="(player, index) in players"
-                                v-model="player.name" 
-                                :key="index" 
-                                :label="`Player ${++index} name`" 
-                                id="id">
-                            </v-text-field>
+                                v-model="player.name"
+                                :rules="rules.notEmpty"
+                                label="What's your name, champion?">
+                            </v-text-field>   
                         </v-form>
                     </v-card-text>
-                    <v-card-actions>
+                    <v-card-actions class="pa-3">
                         <v-spacer></v-spacer>
                         <v-btn @click="onStartQuizClick" color="success"> Start the quiz </v-btn>
                     </v-card-actions>
@@ -56,20 +54,14 @@
 export default {
   data () {
     return {
-      items: [
-        { active: true, title: 'Jason Oner', avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg' },
-        { active: true, title: 'Ranee Carlson', avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg' },
-        { title: 'Cindy Baker', avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg' },
-        { title: 'Ali Connors', avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg' }
-      ],
-      players: [
-        {
-          name: ''
-        },
-        {
-          name: ''
-        }
-      ]
+      rules: {
+        notEmpty: [
+          v => !!v || 'Name is required'
+        ]
+      },
+      player: {
+        name: ''
+      }
     }
   },
   computed: {
@@ -79,8 +71,10 @@ export default {
   },
   methods: {
     onStartQuizClick () {
-      this.$store.dispatch('addPlayers', this.players)
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch('setPlayer', this.player)
         .then(() => this.$router.push('/questions/1'))
+      }      
     }
   }
 }
