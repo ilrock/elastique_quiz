@@ -1,6 +1,6 @@
 <template>
-  <v-container grid-list-xs>
-    <v-layout row wrap class="text-xs-center">
+  <v-container class="fill-height" grid-list-xs>
+    <v-layout d-flex justify-start align-start row wrap class="text-xs-center">
       <v-flex xs12 sm6>
         <v-container grid-list-xs>
           <v-layout row wrap>
@@ -113,6 +113,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   @import url('https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css');
 </style>

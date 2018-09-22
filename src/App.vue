@@ -2,7 +2,7 @@
     <v-app>
         <v-content class="yellow lighten-1">
             <v-container class="fill-height" grid-list-xs>
-                <transition name="fade">
+                <transition name="router-fade">
                     <router-view :key="$route.fullPath"/>
                 </transition>
             </v-container>
@@ -19,16 +19,16 @@ export default {
 }
 </script>
 <style>
-  .fade-enter-active, .fade-leave-active {
+  .router-fade-enter-active, .router-fade-leave-active {
     transition-property: opacity;
     transition-duration: .25s;
   }
 
-  .fade-enter-active {
+  .router-fade-enter-active {
     transition-delay: .25s;
   }
 
-  .fade-enter, .fade-leave-active {
+  .router-fade-enter, .router-fade-leave-active {
     opacity: 0
   }
 

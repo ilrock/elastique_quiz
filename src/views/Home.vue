@@ -1,32 +1,14 @@
 <template>
     <v-container grid-list-xs>
-        <transition name="fade">
-          <v-layout v-if="loading" row wrap>
-            <v-flex d-flex align-center justify-center xs12 class="text-xs-center">
-              <v-dialog
-                :value="true"
-                persistent
-                width="300">
-                <v-card
-                  color="teal"
-                  dark>
-                  <v-card-text>
-                    Loading
-                    <v-progress-linear
-                      indeterminate
-                      color="white"
-                      class="mb-0"
-                    ></v-progress-linear>
-                  </v-card-text>
-                </v-card>
-              </v-dialog>
-            </v-flex>
-          </v-layout>
-        </transition>
-        <transition v-if="!loading" name="fade">
+        <v-layout v-if="loading" row wrap>
+          <v-flex d-flex align-center justify-center xs12 class="text-xs-center">
+            <loader />
+          </v-flex>
+        </v-layout>
+        <transition v-else name="fade">
           <v-layout row wrap>
             <v-flex d-flex justify-center align-start xs12 sm6>
-              <v-card class="elevation-4">
+              <v-card class="elevation-4 mb-4">
                   <v-card-title class="title elevation-2" primary-title>
                     Let's get started
                   </v-card-title>
@@ -55,10 +37,11 @@
 
 <script>
 import Leaderboard from '../components/Leaderboard'
-
+import Loader from '../components/Loader'
 export default {
   components: {
-    Leaderboard
+    Leaderboard,
+    Loader
   },
   data () {
     return {
