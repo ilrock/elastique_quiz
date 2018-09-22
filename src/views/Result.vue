@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height" grid-list-xs>
-    <v-layout d-flex justify-start align-start row wrap class="text-xs-center">
+    <v-layout d-flex justify-start align-start row wrap class="text-xs-left">
       <v-flex xs12 sm6>
         <v-container grid-list-xs>
           <v-layout row wrap>
@@ -19,6 +19,13 @@
                 <h1 class="display-2" v-show="name.show">
                   Congrats {{ player.name }}!
                 </h1>
+              </transition>
+            </v-flex>
+          </v-layout>
+          <v-layout d-flex justify-end align-start row wrap class="text-xs-left">
+            <v-flex xs12 class="mt-5">
+              <transition name="tryAgain" :enter-active-class="button.class">
+                <v-btn @click="resetGame" v-show="button.show" color="success"> Try Again </v-btn>
               </transition>
             </v-flex>
           </v-layout>
@@ -66,6 +73,10 @@ export default {
       leaderboard: {
         show: false,
         class: ''
+      },
+      button: {
+        show: false,
+        class: ''
       }
     }
   },
@@ -106,8 +117,13 @@ export default {
 
       setTimeout(() => {
         this.leaderboard.show = true
+        this.button.show = true
         this.leaderboard.class = 'animated slideInRight'
+        this.button.class = 'animated slideInLeft'
       }, 4000)
+    },
+    resetGame () {
+      
     }
   }
 }

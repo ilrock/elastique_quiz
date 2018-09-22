@@ -1,12 +1,14 @@
 <template>
     <v-container grid-list-xs>
-        <v-layout v-if="loading" row wrap>
-          <v-flex d-flex align-center justify-center xs12 class="text-xs-center">
-            <loader />
-          </v-flex>
-        </v-layout>
-        <transition v-else name="fade">
-          <v-layout row wrap>
+        <transition name="loader" enter-active-class="animated fadeIn" leave-active-class="animated fadeOutDown">
+          <v-layout v-if="loading" row wrap>
+            <v-flex d-flex align-center justify-center xs12 class="text-xs-center">
+              <loader />
+            </v-flex>
+          </v-layout>
+        </transition>
+        <transition name="getStarted" enter-active-class="animated fadeIn" leave-active-class="animated fadeOutDown">
+          <v-layout v-show="!loading" row wrap>
             <v-flex d-flex justify-center align-start xs12 sm6>
               <v-card class="elevation-4 mb-4">
                   <v-card-title class="title elevation-2" primary-title>
