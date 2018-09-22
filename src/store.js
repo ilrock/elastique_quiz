@@ -16,7 +16,7 @@ export default new Vuex.Store({
   getters: {
     score: (state) => state.score,
     leaderboard: (state) => state.leaderboard.sort((a, b) => a.score < b.score),
-    players: (state) => state.players,
+    player: (state) => state.player,
     questions: (state) => state.questions,
     question: (state) => (index) => {
       return state.questions.filter((item) => {

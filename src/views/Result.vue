@@ -11,13 +11,13 @@
             </v-flex>
             <v-flex xs12>
               <transition name="score" :enter-active-class="score.class">
-                <h1 class="display-2" v-show="score.show"> 35345 </h1>
+                <h1 class="display-2" v-show="score.show"> {{ playerScore }} </h1>
               </transition>
             </v-flex>
             <v-flex xs12>
               <transition name="name" :enter-active-class="name.class">
                 <h1 class="display-2" v-show="name.show">
-                  Congrats Andrea!
+                  Congrats {{ player.name }}!
                 </h1>
               </transition>
             </v-flex>
@@ -79,6 +79,9 @@ export default {
       })
   },
   computed: {
+    player () {
+      return this.$store.getters.player
+    },
     playerScore () {
       return this.$store.getters.score
     }
