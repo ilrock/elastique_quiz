@@ -20,7 +20,6 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      // beforeEnter: ifNoQuestionsLoaded,
       component: Home
     },
     {
