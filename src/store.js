@@ -2,14 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { getQuestions } from '@/api/questionService'
-import { leaderboard } from './data'
+import db from './firebase/db'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     score: 0,
-    leaderboard: leaderboard,
+    leaderboard: [],
     player: null,
     questions: []
   },
@@ -31,6 +31,9 @@ export default new Vuex.Store({
     setPlayer (state, payload) {
       state.player = payload
     },
+    setLeaderboard (state, payload) {
+      state.leaderboard = payload
+    },
     setQuestions (state, payload) {
       state.questions = payload
     }
@@ -39,9 +42,13 @@ export default new Vuex.Store({
     addToScore ({ commit }, payload) {
       commit('addToScore', payload)
     },
-    setPlayer ({ commit }, payload) {
+    setPlayer ({ commit }, { name }) {
       return new Promise((resolve) => {
-        commit('setPlayer', payload)
+        const player = {
+          name: name,
+          avatar: `https://api.adorable.io/avatars/${name}`
+        }
+        commit('setPlayer', player)
         resolve()
       })
     },
@@ -62,6 +69,20 @@ export default new Vuex.Store({
           })
           commit('setQuestions', questions)
         })
+    },
+    fetchLeaderboard ({ commit }) {
+      db.collection('leaderboard').onSnapshot((querySnapshot) => {
+        const leaderboard = querySnapshot.docs.map((doc) => doc.data())
+        commit('setLeaderboard', leaderboard)
+      })
+    },
+    addToLeaderboard ({ commit, state }) {
+      const leaderboardEntry = {
+        name: state.player.name,
+        score: state.score,
+        avatar: state.player.avatar
+      }
+      return db.collection('leaderboard').doc(state.player.name).set(leaderboardEntry)
     }
   }
 })

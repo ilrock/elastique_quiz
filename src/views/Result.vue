@@ -6,21 +6,17 @@
           <v-layout row wrap>
             <v-flex xs12>
               <transition name="headline" :enter-active-class="headline.class">
-                <h2 v-show="headline.show"> Your score is </h2>
+                <h2 class="display-2" px-2 v-show="headline.show"> Your score is </h2>
               </transition>
             </v-flex>
             <v-flex xs12>
               <transition name="score" :enter-active-class="score.class">
-                <h1 v-show="score.show"> 35345 </h1>
+                <h1 class="display-2" v-show="score.show"> 35345 </h1>
               </transition>
             </v-flex>
             <v-flex xs12>
               <transition name="name" :enter-active-class="name.class">
-                <h1 v-show="name.show">
-                  <v-avatar
-                    size="50">
-                    <img src="https://api.adorable.io/avatars/23423432" alt="alt">
-                  </v-avatar>
+                <h1 class="display-2" v-show="name.show">
                   Congrats Andrea!
                 </h1>
               </transition>
@@ -77,30 +73,38 @@ export default {
     this.$confetti.stop()
   },
   mounted () {
-    setTimeout(() => {
-      this.headline.show = true
-      this.headline.class = 'animated slideInLeft'
-    }, 500);
-
-    setTimeout(() => {
-      this.score.show = true
-      this.score.class = 'animated slideInLeft'
-    }, 1500);
-
-    setTimeout(() => {
-      this.$confetti.start()
-      this.name.show = true
-      this.name.class = 'animated slideInLeft'
-    }, 2500);
-
-    setTimeout(() => {
-      this.leaderboard.show = true
-      this.leaderboard.class = 'animated slideInRight'
-    }, 4000);
+    this.$store.dispatch('addToLeaderboard')
+      .then(() => {
+        this.startAnimations()
+      })
   },
   computed: {
     playerScore () {
       return this.$store.getters.score
+    }
+  },
+  methods: {
+    startAnimations () {
+      setTimeout(() => {
+        this.headline.show = true
+        this.headline.class = 'animated slideInLeft'
+      }, 500);
+
+      setTimeout(() => {
+        this.score.show = true
+        this.score.class = 'animated slideInLeft'
+      }, 1500);
+
+      setTimeout(() => {
+        this.name.show = true
+        this.$confetti.start()
+        this.name.class = 'animated slideInLeft'
+      }, 2500);
+
+      setTimeout(() => {
+        this.leaderboard.show = true
+        this.leaderboard.class = 'animated slideInRight'
+      }, 4000);
     }
   }
 }

@@ -17,6 +17,7 @@ export default {
   name: 'app',
   created () {
     this.$store.dispatch('fetchQuestions')
+    this.$store.dispatch('fetchLeaderboard')
   }
 }
 </script>
