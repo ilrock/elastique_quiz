@@ -1,23 +1,105 @@
 <template>
-  <h1> Congrats, you made it! Your score is {{ score }} </h1>
+  <v-container grid-list-xs>
+    <v-layout row wrap class="text-xs-center">
+      <v-flex xs12 sm6>
+        <v-container grid-list-xs>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <transition name="headline" :enter-active-class="headline.class">
+                <h2 v-show="headline.show"> Your score is </h2>
+              </transition>
+            </v-flex>
+            <v-flex xs12>
+              <transition name="score" :enter-active-class="score.class">
+                <h1 v-show="score.show"> 35345 </h1>
+              </transition>
+            </v-flex>
+            <v-flex xs12>
+              <transition name="name" :enter-active-class="name.class">
+                <h1 v-show="name.show">
+                  <v-avatar
+                    size="50">
+                    <img src="https://api.adorable.io/avatars/23423432" alt="alt">
+                  </v-avatar>
+                  Congrats Andrea!
+                </h1>
+              </transition>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <v-layout row wrap>
+          <v-flex xs12>
+            <transition name="leaderboard" :enter-active-class="leaderboard.class">
+              <leaderboard v-show="leaderboard.show"/>
+            </transition>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 import Vue from 'vue'
 import VueConfetti from 'vue-confetti'
+import Leaderboard from '../components/Leaderboard'
 
 Vue.use(VueConfetti)
 
 export default {
   name: 'result',
+  components: {
+    Leaderboard
+  },
+  data () {
+    return {
+      headline: {
+        show: false,
+        class: ''
+      },
+      score: {
+        show: false,
+        class: ''
+      },
+      name: {
+        show: false,
+        class: ''
+      },
+      leaderboard: {
+        show: false,
+        class: ''
+      }
+    }
+  },
+  beforeDestroy () {
+    this.$confetti.stop()
+  },
   mounted () {
-    this.$confetti.start()
     setTimeout(() => {
-      this.$confetti.stop()
-    }, 1000);
+      this.headline.show = true
+      this.headline.class = 'animated slideInLeft'
+    }, 500);
+
+    setTimeout(() => {
+      this.score.show = true
+      this.score.class = 'animated slideInLeft'
+    }, 1500);
+
+    setTimeout(() => {
+      this.$confetti.start()
+      this.name.show = true
+      this.name.class = 'animated slideInLeft'
+    }, 2500);
+
+    setTimeout(() => {
+      this.leaderboard.show = true
+      this.leaderboard.class = 'animated slideInRight'
+    }, 4000);
   },
   computed: {
-    score () {
+    playerScore () {
       return this.$store.getters.score
     }
   }
@@ -25,5 +107,5 @@ export default {
 </script>
 
 <style>
-
+  @import url('https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css');
 </style>

@@ -11,7 +11,7 @@ const ifNoQuestionsLoaded = (to, from, next) => {
   const questions = store.getters.questions
   if (questions.length > 0) {
     next()
-  } else next('/')
+  } else next('/result')
 }
 
 export default new Router({
@@ -19,6 +19,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      beforeEnter: ifNoQuestionsLoaded,
       component: Home
     },
     {
@@ -30,7 +31,7 @@ export default new Router({
     {
       path: '/result',
       name: 'result',
-      beforeEnter: ifNoQuestionsLoaded,
+      // beforeEnter: ifNoQuestionsLoaded,
       component: Result
     }
   ]

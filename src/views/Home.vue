@@ -22,51 +22,27 @@
                 </v-card>
             </v-flex>
             <v-flex xs12 offset-sm1 sm5>
-              <v-list subheader class="elevation-4">
-                <v-subheader>All Time Leaderboard</v-subheader>
-                <v-list-tile
-                  v-for="item in leaderboard"
-                  :key="item.name"
-                  avatar
-                >
-                  <v-list-tile-avatar>
-                    <img :src="item.avatar">
-                  </v-list-tile-avatar>
-
-                  <v-list-tile-content>
-                    <v-list-tile-title v-html="item.name"></v-list-tile-title>
-                  </v-list-tile-content>
-
-                  <v-list-tile-action>
-                    <div>
-                      {{ item.score }}
-                      <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
-                    </div>
-                  </v-list-tile-action>
-                </v-list-tile>
-              </v-list>
+              <leaderboard />
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
+import Leaderboard from '../components/Leaderboard'
+
 export default {
+  components: {
+    Leaderboard
+  },
   data () {
     return {
       rules: {
-        notEmpty: [
-          v => !!v || 'Name is required'
-        ]
+        notEmpty: [v => !!v || 'Name is required']
       },
       player: {
         name: ''
       }
-    }
-  },
-  computed: {
-    leaderboard () {
-      return this.$store.getters.leaderboard
     }
   },
   methods: {
