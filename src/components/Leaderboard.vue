@@ -2,8 +2,8 @@
   <v-list subheader class="elevation-4">
     <v-subheader>All Time Leaderboard</v-subheader>
     <v-list-tile
-      v-for="item in leaderboard"
-      :key="item.name"
+      v-for="(item, index) in leaderboard"
+      :key="index"
       avatar
     >
       <v-list-tile-avatar>
@@ -17,7 +17,7 @@
       <v-list-tile-action>
         <div>
           {{ item.score }}
-          <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
+          <v-icon color="teal">{{ index === 0 ? "fas fa-trophy" : "fas fa-frown"}}</v-icon>
         </div>
       </v-list-tile-action>
     </v-list-tile>
@@ -36,5 +36,7 @@ export default {
 </script>
 
 <style>
-
+  i {
+    font-size: 16px !important;
+  }
 </style>

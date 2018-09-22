@@ -1,7 +1,7 @@
 <template>
     <v-container grid-list-xs>
         <v-layout row wrap>
-            <v-flex d-flex justify-center align-center xs12 sm6>
+            <v-flex d-flex justify-center align-start xs12 sm6>
                 <v-card class="elevation-4">
                     <v-card-title class="title elevation-2" primary-title>
                       Let's get started
@@ -17,7 +17,7 @@
                     </v-card-text>
                     <v-card-actions class="pa-3">
                         <v-spacer></v-spacer>
-                        <v-btn @click="onStartQuizClick" color="success"> Start the quiz </v-btn>
+                        <v-btn dark @click="onStartQuizClick" color="teal"> Start the quiz </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>

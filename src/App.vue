@@ -1,10 +1,7 @@
 <template>
     <v-app>
-        <v-toolbar color="primary">
-            
-        </v-toolbar>
-        <v-content>
-            <v-container grid-list-xs>
+        <v-content class="yellow lighten-1">
+            <v-container class="fill-height" grid-list-xs>
                 <transition name="fade">
                     <router-view :key="$route.fullPath"/>
                 </transition>
@@ -37,10 +34,12 @@ export default {
 
   body, .application {
     font-family: 'Questrial', sans-serif !important;
+    color: #333 !important;
   }
 
   h1, h2, h3, h4, h5, h6, .title, .display-2 {
     font-family: 'Allerta', sans-serif !important;
     font-weight: bold;
+    color: #333 !important;
   }
 </style>
