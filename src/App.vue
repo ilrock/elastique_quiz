@@ -34,4 +34,13 @@ export default {
   .fade-enter, .fade-leave-active {
     opacity: 0
   }
+
+  body, .application {
+    font-family: 'Questrial', sans-serif !important;
+  }
+
+  h1, h2, h3, h4, h5, h6, .title, .display-2 {
+    font-family: 'Allerta', sans-serif !important;
+    font-weight: bold;
+  }
 </style>
