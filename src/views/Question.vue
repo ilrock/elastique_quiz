@@ -10,8 +10,8 @@
                       <v-container grid-list-xs>
                           <v-layout column>
                               <v-flex xs12>
-                                  <div v-for="(answer, index) in allAnswers" :key="index">
-                                      <v-btn block outline color="indigo">{{ answer }}</v-btn>
+                                  <div v-for="(answer, index) in shuffledAnswers" :key="index">
+                                      <v-btn block outline color="indigo">{{ answer.text }}</v-btn>
                                   </div>
                               </v-flex>
                           </v-layout>
@@ -78,8 +78,8 @@ export default {
     question () {
       return this.$store.getters.question(this.currentId)
     },
-    allAnswers () {
-      return this.question.otherAnswers.concat(this.question.correctAnswer)
+    shuffledAnswers () {
+      return this.shuffle(this.question.answers)
     },
     nextUrl () {
       const currentId = parseInt(this.currentId)
@@ -92,6 +92,16 @@ export default {
   methods: {
     onCountdownEnd () {
       this.$router.push(this.nextUrl)
+    },
+    shuffle (array) {
+      var j, x, i;
+      for (i = array.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = array[i];
+          array[i] = array[j];
+          array[j] = x;
+      }
+      return array;
     }
   }
 }

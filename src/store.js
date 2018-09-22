@@ -37,12 +37,18 @@ export default new Vuex.Store({
     fetchQuestions ({ commit }) {
       getQuestions()
         .then((res) => {
-          const questions = res.data.results.map((result, index) => ({
-            id: ++index,
-            text: decodeURIComponent(result.question),
-            correctAnswer: [decodeURIComponent(result.correct_answer)],
-            otherAnswers: decodeURIComponent(result.incorrect_answers).split(',')
-          }))
+          const questions = res.data.results.map((result, index) => {
+            const answers = decodeURIComponent(result.incorrect_answers).split(',').map((answer) => ({ text: answer, correct: false }))
+            answers.push({
+              text: decodeURIComponent(result.correct_answer),
+              correct: true
+            })
+            return {
+              id: ++index,
+              text: decodeURIComponent(result.question),
+              answers
+            }
+          })
 
           commit('setQuestions', questions)
         })
