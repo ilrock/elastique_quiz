@@ -2,17 +2,20 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { getQuestions } from '@/api/questionService'
+import { leaderboard } from './data'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     score: 0,
+    leaderboard: leaderboard,
     players: [],
     questions: []
   },
   getters: {
     score: (state) => state.score,
+    leaderboard: (state) => state.leaderboard.sort((a, b) => a.score < b.score),
     players: (state) => state.players,
     questions: (state) => state.questions,
     question: (state) => (index) => {

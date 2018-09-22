@@ -27,8 +27,8 @@
               <v-list subheader class="elevation-4">
                 <v-subheader>All Time Leaderboard</v-subheader>
                 <v-list-tile
-                  v-for="item in items"
-                  :key="item.title"
+                  v-for="item in leaderboard"
+                  :key="item.name"
                   avatar
                 >
                   <v-list-tile-avatar>
@@ -36,11 +36,14 @@
                   </v-list-tile-avatar>
 
                   <v-list-tile-content>
-                    <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                    <v-list-tile-title v-html="item.name"></v-list-tile-title>
                   </v-list-tile-content>
 
                   <v-list-tile-action>
-                    <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
+                    <div>
+                      {{ item.score }}
+                      <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
+                    </div>
                   </v-list-tile-action>
                 </v-list-tile>
               </v-list>
@@ -67,6 +70,11 @@ export default {
           name: ''
         }
       ]
+    }
+  },
+  computed: {
+    leaderboard () {
+      return this.$store.getters.leaderboard
     }
   },
   methods: {

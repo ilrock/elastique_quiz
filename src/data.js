@@ -35,4 +35,27 @@ const question = [
   }
 ]
 
-export { question }
+const leaderboard = [
+  {
+    name: 'Andrea',
+    score: 343,
+    avatar: 'https://api.adorable.io/avatars/23423432'
+  },
+  {
+    name: 'Nina',
+    score: 55,
+    avatar: 'https://api.adorable.io/avatars/45'
+  },
+  {
+    name: 'John',
+    score: 43545,
+    avatar: 'https://api.adorable.io/avatars/4534'
+  },
+  {
+    name: 'Inge',
+    score: 345,
+    avatar: 'https://api.adorable.io/avatars/43543534'
+  }
+]
+
+export { question, leaderboard }
