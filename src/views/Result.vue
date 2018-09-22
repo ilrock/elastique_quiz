@@ -123,7 +123,9 @@ export default {
       }, 4000)
     },
     resetGame () {
-      
+      this.$store.dispatch('fetchQuestions')
+      this.$store.dispatch('resetScore')
+      this.$router.push('/questions/1')
     }
   }
 }

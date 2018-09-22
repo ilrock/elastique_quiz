@@ -13,6 +13,9 @@ export default {
     },
     setPlayer (state, payload) {
       state.player = payload
+    },
+    resetScore (state) {
+      state.score = 0
     }
   },
   actions: {
@@ -28,6 +31,9 @@ export default {
         commit('setPlayer', player)
         resolve()
       })
+    },
+    resetScore ({ commit }) {
+      commit('resetScore')
     }
   }
 }
