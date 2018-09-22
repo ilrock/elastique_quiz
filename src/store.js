@@ -10,10 +10,12 @@ export default new Vuex.Store({
   state: {
     score: 0,
     leaderboard: [],
+    loading: false,
     player: null,
     questions: []
   },
   getters: {
+    loading: (state) => state.loading,
     score: (state) => state.score,
     leaderboard: (state) => state.leaderboard.sort((a, b) => a.score < b.score),
     player: (state) => state.player,
@@ -25,6 +27,13 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    toggleLoading (state, payload = false) {
+      if (payload) {
+        state.loading = payload
+      } else {
+        state.loading = !state.loading
+      }
+    },
     addToScore (state, payload) {
       state.score += payload
     },
@@ -53,6 +62,7 @@ export default new Vuex.Store({
       })
     },
     fetchQuestions ({ commit }) {
+      commit('toggleLoading', true)
       getQuestions()
         .then((res) => {
           const questions = res.data.results.map((result, index) => {
@@ -68,13 +78,22 @@ export default new Vuex.Store({
             }
           })
           commit('setQuestions', questions)
+          setTimeout(() => {
+            commit('toggleLoading', false)
+          }, 1500)
         })
     },
     fetchLeaderboard ({ commit }) {
+      commit('toggleLoading', true)
       db.collection('leaderboard').onSnapshot((querySnapshot) => {
         const leaderboard = querySnapshot.docs.map((doc) => doc.data())
         commit('setLeaderboard', leaderboard)
       })
+        .then(() => {
+          setTimeout(() => {
+            commit('toggleLoading', false)
+          }, 1500)
+        })
     },
     addToLeaderboard ({ commit, state }) {
       const leaderboardEntry = {
