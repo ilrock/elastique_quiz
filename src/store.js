@@ -7,10 +7,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    score: 0,
     players: [],
     questions: []
   },
   getters: {
+    score: (state) => state.score,
     players: (state) => state.players,
     questions: (state) => state.questions,
     question: (state) => (index) => {
@@ -20,6 +22,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    addToScore (state, payload) {
+      state.score += payload
+    },
     addPlayers (state, payload) {
       state.players = payload
     },
@@ -28,6 +33,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    addToScore ({ commit }, payload) {
+      commit('addToScore', payload)
+    },
     addPlayers ({ commit }, payload) {
       return new Promise((resolve) => {
         commit('addPlayers', payload)
@@ -49,7 +57,6 @@ export default new Vuex.Store({
               answers
             }
           })
-
           commit('setQuestions', questions)
         })
     }

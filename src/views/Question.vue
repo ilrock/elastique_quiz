@@ -11,7 +11,14 @@
                           <v-layout column>
                               <v-flex xs12>
                                   <div v-for="(answer, index) in shuffledAnswers" :key="index">
-                                      <v-btn block outline color="indigo">{{ answer.text }}</v-btn>
+                                      <v-btn
+                                          :ref="`answer${index}`" 
+                                          @click="onAnswerClick(answer)"
+                                          block 
+                                          :outline="selectedAnswer? false : true"
+                                          :color="selectedAnswer? (answer.correct? 'green' : 'red') : 'indigo'">
+                                              {{ answer.text }}
+                                      </v-btn>
                                   </div>
                               </v-flex>
                           </v-layout>
@@ -53,6 +60,7 @@ export default {
   data () {
     return {
       interval: {},
+      selectedAnswer: null,
       value: 0,
       countdown: 20,
     }
@@ -69,6 +77,9 @@ export default {
     }, 1000)
   },
   computed: {
+    score () {
+      return this.$store.getters.score
+    },
     questions () {
       return this.$store.getters.questions
     },
@@ -102,6 +113,15 @@ export default {
           array[j] = x;
       }
       return array;
+    },
+    onAnswerClick (answer) {
+      this.selectedAnswer = answer
+      if (answer.correct) {
+        this.$store.dispatch('addToScore', 2)
+      }
+      setTimeout(() => {
+        this.$router.push(this.nextUrl)
+      }, 1500);
     }
   }
 }
