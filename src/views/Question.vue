@@ -60,6 +60,7 @@ export default {
   data () {
     return {
       interval: {},
+      alphabet: ['a','b','c','d'],
       selectedAnswer: null,
       value: 0,
       countdown: 20,
@@ -122,7 +123,7 @@ export default {
       setTimeout(() => {
         this.$router.push(this.nextUrl)
       }, 1500);
-    }
+    } 
   }
 }
 </script>

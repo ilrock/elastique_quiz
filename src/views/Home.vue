@@ -1,7 +1,7 @@
 <template>
-    <v-container justify-center align-center grid-list-xs>
+    <v-container grid-list-xs>
         <v-layout row wrap>
-            <v-flex xs12 sm8 offset-sm2>
+            <v-flex d-flex justify-center align-center xs12 sm6>
                 <v-card class="elevation-4">
                     <v-card-title class="title elevation-2" primary-title>
                         Add Players
@@ -23,6 +23,28 @@
                     </v-card-actions>
                 </v-card>
             </v-flex>
+            <v-flex xs12 offset-sm1 sm5>
+              <v-list subheader class="elevation-4">
+                <v-subheader>All Time Leaderboard</v-subheader>
+                <v-list-tile
+                  v-for="item in items"
+                  :key="item.title"
+                  avatar
+                >
+                  <v-list-tile-avatar>
+                    <img :src="item.avatar">
+                  </v-list-tile-avatar>
+
+                  <v-list-tile-content>
+                    <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                  </v-list-tile-content>
+
+                  <v-list-tile-action>
+                    <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
+                  </v-list-tile-action>
+                </v-list-tile>
+              </v-list>
+            </v-flex>
         </v-layout>
     </v-container>
 </template>
@@ -31,6 +53,12 @@
 export default {
   data () {
     return {
+      items: [
+        { active: true, title: 'Jason Oner', avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg' },
+        { active: true, title: 'Ranee Carlson', avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg' },
+        { title: 'Cindy Baker', avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg' },
+        { title: 'Ali Connors', avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg' }
+      ],
       players: [
         {
           name: ''
